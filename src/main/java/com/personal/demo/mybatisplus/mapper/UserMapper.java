@@ -6,5 +6,6 @@ import com.personal.demo.mybatisplus.entity.User;
 import com.personal.demo.mybatisplus.query.UserQuery;
 
 public interface UserMapper extends BaseMapper<User> {
-    IPage<UserQuery> getAllUser(IPage page);
+    IPage<UserQuery> getUserByIdWithTopicCount(IPage page, String userId);
+    User getUserById(String id);
 }

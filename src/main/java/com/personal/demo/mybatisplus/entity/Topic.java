@@ -1,22 +1,22 @@
 package com.personal.demo.mybatisplus.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.UUID;
 
-@Data
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Topic {
     @Id
-    @TableId(type = IdType.ASSIGN_UUID)
     private String id;
-    private String name;
+    @Column(columnDefinition="varchar(255) COMMENT '话题主题'")
+    private String subject;
+    @Column(columnDefinition="varchar(255) COMMENT '话题发布者'")
+    private String publisher;
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.personal.demo.mybatisplus.mapper.TopicMapper">
+
+    <resultMap id="singleTopQueryResult" type="com.personal.demo.mybatisplus.query.TopicQuery">
+        <association property="publisher" column="publisher" select="com.personal.demo.mybatisplus.mapper.UserMapper.getUserById"/>
+    </resultMap>
+
+    <select id="getTopicById" resultMap="singleTopQueryResult">
+        select * from topic where id = #{topicId}
+    </select>
+</mapper>

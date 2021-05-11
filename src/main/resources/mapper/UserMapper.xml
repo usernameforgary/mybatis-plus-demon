@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.personal.demo.mybatisplus.mapper.UserMapper">
-    <select id="getAllUser" resultType="com.personal.demo.mybatisplus.query.UserQuery">
-        select * from user
+    
+    <resultMap id="selectAllUserWithTopicCountQueryMap" type="com.personal.demo.mybatisplus.query.UserQuery">
+        <association property="topicCount"  column="id" select="getPublishedTopicCount"/>
+    </resultMap>
+    <select id="getUserByIdWithTopicCount" resultMap="selectAllUserWithTopicCountQueryMap">
+        select #{userId} id, `name` from `user` A
+        <where>
+            A.id = #{userId}
+        </where>
+    </select>
+
+    <select id="getPublishedTopicCount" resultType="java.lang.Integer">
+        select count(1) from topic
+        where
+            publisher = #{userId}
+    </select>
+
+    <select id="getUserById" resultType="com.personal.demo.mybatisplus.entity.User">
+        select * from user where id = #{id}
     </select>
 </mapper>
