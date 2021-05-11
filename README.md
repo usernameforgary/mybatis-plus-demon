@@ -18,12 +18,15 @@
       <resultMap id="singleTopQueryResult" type="com.personal.demo.mybatisplus.query.TopicQuery">
           <association property="publisher" column="publisher" select="com.personal.demo.mybatisplus.mapper.UserMapper.getUserById"/>
       </resultMap>
+      <!--
+          **property**属性：对应type里需要映射的属性名
+          **column**属性：对应需要传入association的**select**属性对应的查询中的字段名（表的列名）
+      -->
       <select id="getTopicById" resultMap="singleTopQueryResult">
           select * from topic where id = #{topicId}
       </select>
     ```
-    property对应需要映射的类里，对应的字段
-    column是当前查询中，需要传递到后面select指定查询的字段
+    
    
     
         
