@@ -1,8 +1,9 @@
-package com.personal.demo.mybatisplus.controller;
+package com.personal.demo.mybatisplus.web.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.personal.demo.mybatisplus.entity.User;
+import com.personal.demo.mybatisplus.exception.UserNotExistsException;
 import com.personal.demo.mybatisplus.mapper.UserMapper;
 import com.personal.demo.mybatisplus.query.UserQuery;
 import com.personal.demo.mybatisplus.service.UserRepositoryImp;
@@ -36,7 +37,15 @@ public class UserController {
       return userRepositoryImp.createUser(user);
    }
 
-   @GetMapping("/")
+
+   @GetMapping("/getUserById/{id}")
+   public UserQuery getUserById(@PathVariable String id) {
+      System.out.println(id);
+      UserQuery userQuery = new UserQuery();
+      return userQuery;
+   }
+
+   @GetMapping("/all")
    public List<User> getAllUser() {
        return userMapper.selectList(null);
    }
@@ -47,5 +56,15 @@ public class UserController {
    public IPage<UserQuery> getAllUserMapper(@RequestParam String userId, @RequestParam(defaultValue="1") int currentPage, @RequestParam(defaultValue = "2") int pageSize) {
       Page page = new Page(currentPage,pageSize);
       return userMapper.getUserByIdWithTopicCount(page, userId);
+   }
+
+   @GetMapping("/getUserNotFoundEx")
+   public UserQuery throwUserNotFoundException() {
+      throw new UserNotExistsException("user id");
+   }
+
+   @GetMapping("/useTimeFilter")
+   public void useTimeFilter() {
+
    }
 }

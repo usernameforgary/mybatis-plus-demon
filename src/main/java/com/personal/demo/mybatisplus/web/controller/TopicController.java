@@ -1,15 +1,11 @@
-package com.personal.demo.mybatisplus.controller;
+package com.personal.demo.mybatisplus.web.controller;
 
 import com.personal.demo.mybatisplus.entity.Topic;
 import com.personal.demo.mybatisplus.query.TopicQuery;
-import com.personal.demo.mybatisplus.service.TopicRepository;
 import com.personal.demo.mybatisplus.service.TopicRepositoryImp;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/topic")
